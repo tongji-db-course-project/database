@@ -1,11 +1,9 @@
 CREATE TABLE inventory (
-    inventory_id    NUMBER(10)     NOT NULL,
-    product_id      NUMBER(10)     NOT NULL,
-    current_stock   NUMBER(10)     NOT NULL,
-    last_update_time DATE          NOT NULL,
-    -- 主键约束
+    inventory_id     NUMBER(10) NOT NULL,
+    product_id       NUMBER(10) NOT NULL,
+    current_stock    NUMBER(10) NOT NULL,
+    last_update_time DATE NOT NULL,
     CONSTRAINT pk_inventory PRIMARY KEY (inventory_id),
-    -- 外键约束：关联商品表
     CONSTRAINT fk_inventory_product FOREIGN KEY (product_id) REFERENCES product(product_id)
 );
 

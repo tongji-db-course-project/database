@@ -36,7 +36,6 @@ COMMIT;
 INSERT INTO sys_role (role_id, role_name, role_desc) VALUES (1, '系统管理员', '拥有系统全部权限');
 INSERT INTO sys_role (role_id, role_name, role_desc) VALUES (2, '采购员', '负责采购业务');
 INSERT INTO sys_role (role_id, role_name, role_desc) VALUES (3, '收银员', '负责销售收银业务');
-INSERT INTO sys_role (role_id, role_name, role_desc) VALUES (4, '仓库管理员', '负责库存管理');
 
 INSERT INTO sys_menu (menu_id, menu_name, menu_url, parent_id, menu_order) VALUES (1, '系统管理', '/system', NULL, 1);
 INSERT INTO sys_menu (menu_id, menu_name, menu_url, parent_id, menu_order) VALUES (2, '用户管理', '/system/users', 1, 1);
@@ -50,7 +49,6 @@ INSERT INTO sys_menu (menu_id, menu_name, menu_url, parent_id, menu_order) VALUE
 INSERT INTO sys_user (user_id, role_id, username, password, real_name, gender, phone, status, create_time) VALUES (1, 1, 'admin', '123456', '系统管理员', '男', '13800000001', '启用', SYSDATE);
 INSERT INTO sys_user (user_id, role_id, username, password, real_name, gender, phone, status, create_time) VALUES (2, 2, 'buyer01', '123456', '张采购', '女', '13800000002', '启用', SYSDATE);
 INSERT INTO sys_user (user_id, role_id, username, password, real_name, gender, phone, status, create_time) VALUES (3, 3, 'cashier01', '123456', '李收银', '女', '13800000003', '启用', SYSDATE);
-INSERT INTO sys_user (user_id, role_id, username, password, real_name, gender, phone, status, create_time) VALUES (4, 4, 'stock01', '123456', '王仓管', '男', '13800000004', '启用', SYSDATE);
 
 INSERT INTO sys_role_menu (role_menu_id, role_id, menu_id) VALUES (1, 1, 1);
 INSERT INTO sys_role_menu (role_menu_id, role_id, menu_id) VALUES (2, 1, 2);
@@ -61,9 +59,9 @@ INSERT INTO sys_role_menu (role_menu_id, role_id, menu_id) VALUES (6, 1, 6);
 INSERT INTO sys_role_menu (role_menu_id, role_id, menu_id) VALUES (7, 1, 7);
 INSERT INTO sys_role_menu (role_menu_id, role_id, menu_id) VALUES (8, 1, 8);
 INSERT INTO sys_role_menu (role_menu_id, role_id, menu_id) VALUES (9, 2, 5);
-INSERT INTO sys_role_menu (role_menu_id, role_id, menu_id) VALUES (10, 3, 6);
-INSERT INTO sys_role_menu (role_menu_id, role_id, menu_id) VALUES (11, 3, 8);
-INSERT INTO sys_role_menu (role_menu_id, role_id, menu_id) VALUES (12, 4, 7);
+INSERT INTO sys_role_menu (role_menu_id, role_id, menu_id) VALUES (10, 2, 7);
+INSERT INTO sys_role_menu (role_menu_id, role_id, menu_id) VALUES (11, 3, 6);
+INSERT INTO sys_role_menu (role_menu_id, role_id, menu_id) VALUES (12, 3, 8);
 
 INSERT INTO supplier (supplier_id, supplier_name, contact_name, phone, email, address, credit_level, payment_cycle, min_order_qty, bank_name, bank_account) VALUES (1, '华东食品供应商', '陈经理', '021-88880001', 'food@example.com', '上海市浦东新区', 'A', 30, 10, '中国工商银行', '6222021001000001');
 INSERT INTO supplier (supplier_id, supplier_name, contact_name, phone, email, address, credit_level, payment_cycle, min_order_qty, bank_name, bank_account) VALUES (2, '南方日化批发部', '刘经理', '020-88880002', 'daily@example.com', '广州市天河区', 'A', 45, 5, '中国建设银行', '6227002002000002');
@@ -108,8 +106,8 @@ INSERT INTO inventory (inventory_id, product_id, warehouse_id, current_stock, la
 INSERT INTO inventory (inventory_id, product_id, warehouse_id, current_stock, last_update_time) VALUES (4, 4, 1, 591, SYSDATE);
 INSERT INTO inventory (inventory_id, product_id, warehouse_id, current_stock, last_update_time) VALUES (5, 5, 1, 119, SYSDATE);
 
-INSERT INTO inventory_record (record_id, product_id, record_type, source_no, change_qty, remain_qty, operator_id, record_time, remark) VALUES (1, 1, '入库', 'PO20260501001', 200, 200, 4, TO_DATE('2026-05-01 14:00:00', 'YYYY-MM-DD HH24:MI:SS'), '采购入库');
-INSERT INTO inventory_record (record_id, product_id, record_type, source_no, change_qty, remain_qty, operator_id, record_time, remark) VALUES (2, 2, '入库', 'PO20260501001', 80, 80, 4, TO_DATE('2026-05-01 14:05:00', 'YYYY-MM-DD HH24:MI:SS'), '采购入库');
+INSERT INTO inventory_record (record_id, product_id, record_type, source_no, change_qty, remain_qty, operator_id, record_time, remark) VALUES (1, 1, '入库', 'PO20260501001', 200, 200, 2, TO_DATE('2026-05-01 14:00:00', 'YYYY-MM-DD HH24:MI:SS'), '采购入库');
+INSERT INTO inventory_record (record_id, product_id, record_type, source_no, change_qty, remain_qty, operator_id, record_time, remark) VALUES (2, 2, '入库', 'PO20260501001', 80, 80, 2, TO_DATE('2026-05-01 14:05:00', 'YYYY-MM-DD HH24:MI:SS'), '采购入库');
 INSERT INTO inventory_record (record_id, product_id, record_type, source_no, change_qty, remain_qty, operator_id, record_time, remark) VALUES (3, 1, '销售', 'SO20260503001', -2, 198, 3, TO_DATE('2026-05-03 10:15:00', 'YYYY-MM-DD HH24:MI:SS'), '销售出库');
 INSERT INTO inventory_record (record_id, product_id, record_type, source_no, change_qty, remain_qty, operator_id, record_time, remark) VALUES (4, 3, '销售', 'SO20260503002', -2, 48, 3, TO_DATE('2026-05-03 15:30:00', 'YYYY-MM-DD HH24:MI:SS'), '销售出库');
 INSERT INTO inventory_record (record_id, product_id, record_type, source_no, change_qty, remain_qty, operator_id, record_time, remark) VALUES (5, 1, '销售', 'SO20260504001', -3, 195, 3, TO_DATE('2026-05-04 09:20:00', 'YYYY-MM-DD HH24:MI:SS'), '销售出库');
@@ -136,7 +134,7 @@ INSERT INTO warehouse (warehouse_id, warehouse_name, address, status, create_tim
 -- 采购单 PO20260501001：待审批 → 已审批 → 已入库
 INSERT INTO order_status_log (log_id, order_type, order_id, old_status, new_status, operator_id, change_time, remark) VALUES (1, '采购单', 1, NULL, '待审批', 2, TO_DATE('2026-05-01 09:00:00', 'YYYY-MM-DD HH24:MI:SS'), '创建采购单');
 INSERT INTO order_status_log (log_id, order_type, order_id, old_status, new_status, operator_id, change_time, remark) VALUES (2, '采购单', 1, '待审批', '已审批', 1, TO_DATE('2026-05-01 14:00:00', 'YYYY-MM-DD HH24:MI:SS'), '审核通过');
-INSERT INTO order_status_log (log_id, order_type, order_id, old_status, new_status, operator_id, change_time, remark) VALUES (3, '采购单', 1, '已审批', '已入库', 4, TO_DATE('2026-05-03 10:00:00', 'YYYY-MM-DD HH24:MI:SS'), '采购入库完成');
+INSERT INTO order_status_log (log_id, order_type, order_id, old_status, new_status, operator_id, change_time, remark) VALUES (3, '采购单', 1, '已审批', '已入库', 2, TO_DATE('2026-05-03 10:00:00', 'YYYY-MM-DD HH24:MI:SS'), '采购入库完成');
 
 -- 采购单 PO20260502001：待审批 → 已审批
 INSERT INTO order_status_log (log_id, order_type, order_id, old_status, new_status, operator_id, change_time, remark) VALUES (4, '采购单', 2, NULL, '待审批', 2, TO_DATE('2026-05-02 09:00:00', 'YYYY-MM-DD HH24:MI:SS'), '创建采购单');

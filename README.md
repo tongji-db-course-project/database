@@ -13,29 +13,53 @@
 
 ## 快速启动
 
-```bash
-# 构建镜像
-docker build -t retail-db .
+### 1. 构建镜像
 
-# 启动容器
-docker run -d --name retail-db -p 1521:1521 retail-db
+```bash
+docker build -t retail-db .
 ```
 
-容器首次启动时会自动按序执行 SQL 初始化脚本。
+### 2. 启动容器
 
-> **注意**：Dockerfile 中的 `COPY ./init-scripts/` 路径在当前仓库已合并为根目录的两个 SQL 文件。如需使用 Docker 自动初始化，请将 `01_schema.sql` 和 `02_data.sql` 放入 `init-scripts/` 目录后再构建镜像，或直接连接数据库手动执行。
+```bash
+docker run -d --name retail-db -p 1521:1521 -v oracle-data:/opt/oracle/oradata retail-db
+```
 
-连接信息：
-- **Host**: `localhost:1521`
-- **SID/Service**: `FREEPDB1`
-- **App User**: `retail_admin` / `123456`
-- **SYS Password**: `123456`
+首次启动需解压数据库文件，约 30~60 秒。查看日志等待就绪：
+
+```bash
+docker logs -f retail-db
+# 看到 "DATABASE IS READY TO USE!" 即可 Ctrl+C 退出
+```
+
+### 3. 初始化数据库（手动执行 SQL）
+
+> **注意**：gvenzl 镜像的 `/container-entrypoint-initdb.d/` 自动执行机制在 Oracle 23ai Free 上存在 ORA-00600 内部 bug，会导致建表后回滚。因此 SQL 脚本需在容器就绪后手动执行。
+
+```bash
+# 执行建表脚本（30 张表，含约束、索引、注释）
+cat 01_schema.sql | docker exec -i retail-db sqlplus retail_admin/123456@FREEPDB1
+
+# 执行初始数据脚本（种子数据）
+cat 02_data.sql | docker exec -i retail-db sqlplus retail_admin/123456@FREEPDB1
+```
+
+> 如果需要重新初始化：`docker stop retail-db && docker rm retail-db && docker volume rm oracle-data`，然后从步骤 2 重新开始。
+
+### 连接信息
+
+| 项目 | 值 |
+|------|-----|
+| **Host** | `localhost:1521` |
+| **Service** | `FREEPDB1` |
+| **App User** | `retail_admin` / `123456` |
+| **SYSTEM** | `system` / `123456` |
 
 ## 文件结构
 
 ```
 .
-├── Dockerfile          # Oracle 容器镜像定义
+├── Dockerfile          # Oracle 容器镜像定义（SQL 脚本拷入 /tmp/sql/，需手动执行）
 ├── 01_schema.sql       # DDL：30 张表，含约束、注释、索引
 ├── 02_data.sql         # DML：种子/测试数据（含清理旧数据逻辑）
 ├── .gitattributes      # 强制 LF 换行，标记 SQL 为代码语言

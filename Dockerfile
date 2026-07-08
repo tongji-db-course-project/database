@@ -8,9 +8,12 @@ ENV ORACLE_PASSWORD=123456 \
     APP_USER=retail_admin \
     APP_USER_PASSWORD=123456
 
-# 将初始化脚本（建表、插入基础数据）放入镜像中的特定目录
-# 容器首次启动时会自动按顺序执行这些 SQL 文件
-COPY *.sql /container-entrypoint-initdb.d/
+# 将 SQL 脚本拷入镜像备用
+# 注意：gvenzl 镜像的 /container-entrypoint-initdb.d/ 自动执行机制在 Oracle 23ai Free
+# 上有 ORA-00600 内部 bug，会导致表创建后回滚。因此脚本不再自动执行，
+# 改为放在 /tmp/sql/ 目录，待容器启动后手动运行 sqlplus 执行。
+RUN mkdir -p /tmp/sql
+COPY *.sql /tmp/sql/
 
 # 暴露端口
 EXPOSE 1521

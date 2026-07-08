@@ -1,36 +1,62 @@
 -- ============================================================
 -- 清理旧数据（按外键依赖倒序删除，子表先删父表后删）
+-- 依赖层次（由深到浅，数字越小越先删）：
+--   L1(无子表): order_status_log, daily_settlement, point_config,
+--               所有明细表, inventory, supplier_settlement, point_record,
+--               sys_role_menu
+--   L2: stock_check_order, transfer_order, purchase_return_order,
+--       return_order, coupon_template
+--   L3: sale_order, purchase_order
+--   L4: product
+--   L5: member, product_category, supplier, warehouse
+--   L6: sys_user
+--   L7: sys_menu, sys_role
 -- ============================================================
+
+-- L1: 无其他表通过 FK 引用它们，可安全先删
 DELETE FROM order_status_log;
 DELETE FROM daily_settlement;
+DELETE FROM point_config;
 DELETE FROM stock_check_detail;
-DELETE FROM stock_check_order;
 DELETE FROM transfer_order_detail;
-DELETE FROM transfer_order;
 DELETE FROM member_coupon;
-DELETE FROM coupon_template;
 DELETE FROM purchase_return_order_detail;
-DELETE FROM purchase_return_order;
 DELETE FROM return_order_detail;
-DELETE FROM return_order;
 DELETE FROM sale_order_detail;
-DELETE FROM sale_order;
 DELETE FROM purchase_order_detail;
-DELETE FROM purchase_order;
 DELETE FROM inventory_record;
 DELETE FROM inventory;
 DELETE FROM supplier_settlement;
 DELETE FROM point_record;
-DELETE FROM point_config;
+DELETE FROM sys_role_menu;
+
+-- L2: 仅被 L1 明细表引用
+DELETE FROM stock_check_order;
+DELETE FROM transfer_order;
+DELETE FROM purchase_return_order;
+DELETE FROM return_order;
+DELETE FROM coupon_template;
+
+-- L3: 被 L1/L2 引用（sale_order_detail→sale_order, purchase_order_detail→purchase_order 等）
+DELETE FROM sale_order;
+DELETE FROM purchase_order;
+
+-- L4: 被大量明细表引用（purchase_order_detail, sale_order_detail, inventory 等）
 DELETE FROM product;
+
+-- L5: 被上级表引用（member→sale_order, supplier→purchase_order/product, warehouse→inventory 等）
 DELETE FROM member;
 DELETE FROM product_category;
 DELETE FROM supplier;
 DELETE FROM warehouse;
-DELETE FROM sys_role_menu;
+
+-- L6: 被采购/销售/退货/调拨/盘点等主表引用
 DELETE FROM sys_user;
+
+-- L7: 根表（sys_role←sys_user/sys_role_menu, sys_menu←sys_role_menu）
 DELETE FROM sys_menu;
 DELETE FROM sys_role;
+
 COMMIT;
 
 INSERT INTO sys_role (role_id, role_name, role_desc) VALUES (1, '系统管理员', '拥有系统全部权限');
@@ -100,6 +126,9 @@ INSERT INTO sale_order_detail (sale_detail_id, sale_id, product_id, sale_quantit
 INSERT INTO sale_order_detail (sale_detail_id, sale_id, product_id, sale_quantity, sale_price) VALUES (5, 2, 5, 1, 8.90);
 INSERT INTO sale_order_detail (sale_detail_id, sale_id, product_id, sale_quantity, sale_price) VALUES (6, 3, 1, 3, 6.50);
 
+-- warehouse 必须在 inventory 之前插入，inventory 有 FK 引用 warehouse
+INSERT INTO warehouse (warehouse_id, warehouse_name, address, status, create_time) VALUES (1, '总仓', '默认仓库', '启用', SYSDATE - 180);
+
 INSERT INTO inventory (inventory_id, product_id, warehouse_id, current_stock, last_update_time) VALUES (1, 1, 1, 195, SYSDATE);
 INSERT INTO inventory (inventory_id, product_id, warehouse_id, current_stock, last_update_time) VALUES (2, 2, 1, 79, SYSDATE);
 INSERT INTO inventory (inventory_id, product_id, warehouse_id, current_stock, last_update_time) VALUES (3, 3, 1, 48, SYSDATE);
@@ -126,9 +155,6 @@ INSERT INTO supplier_settlement (settlement_id, supplier_id, purchase_id, settle
 -- ============================================================
 -- 以下为新增表的种子数据
 -- ============================================================
-
--- 19. warehouse（单仓库模式）
-INSERT INTO warehouse (warehouse_id, warehouse_name, address, status, create_time) VALUES (1, '总仓', '默认仓库', '启用', SYSDATE - 180);
 
 -- 20. order_status_log（现有订单的状态流转日志）
 -- 采购单 PO20260501001：待审批 → 已审批 → 已入库

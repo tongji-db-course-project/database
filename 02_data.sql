@@ -71,9 +71,9 @@ INSERT INTO product_category (category_id, category_name, category_desc, status)
 INSERT INTO product_category (category_id, category_name, category_desc, status) VALUES (2, '日用品', '家庭日常用品', '启用');
 INSERT INTO product_category (category_id, category_name, category_desc, status) VALUES (3, '饮料', '瓶装饮料和冲调饮品', '启用');
 
-INSERT INTO member (member_id, member_name, gender, phone, birthday, points, member_tag, total_amount, level_name, discount_rate, create_time) VALUES (1, '赵一一', '女', '13900000001', TO_DATE('1992-05-18', 'YYYY-MM-DD'), 120, '高消费', 568.50, '黄金会员', 0.95, SYSDATE - 90);
-INSERT INTO member (member_id, member_name, gender, phone, birthday, points, member_tag, total_amount, level_name, discount_rate, create_time) VALUES (2, '钱二二', '男', '13900000002', TO_DATE('1988-09-20', 'YYYY-MM-DD'), 360, 'VIP', 1832.00, '钻石会员', 0.90, SYSDATE - 180);
-INSERT INTO member (member_id, member_name, gender, phone, birthday, points, member_tag, total_amount, level_name, discount_rate, create_time) VALUES (3, '孙三三', '未知', '13900000003', NULL, 20, NULL, 98.00, '普通会员', 1.00, SYSDATE - 15);
+INSERT INTO member (member_id, member_name, gender, phone, birthday, points, member_tag, total_amount, level_name, status, create_time) VALUES (1, '赵一一', '女', '13900000001', TO_DATE('1992-05-18', 'YYYY-MM-DD'), 120, '高消费', 568.50, '黄金会员', '启用', SYSDATE - 90);
+INSERT INTO member (member_id, member_name, gender, phone, birthday, points, member_tag, total_amount, level_name, status, create_time) VALUES (2, '钱二二', '男', '13900000002', TO_DATE('1988-09-20', 'YYYY-MM-DD'), 360, 'VIP', 1832.00, '钻石会员', '启用', SYSDATE - 180);
+INSERT INTO member (member_id, member_name, gender, phone, birthday, points, member_tag, total_amount, level_name, status, create_time) VALUES (3, '孙三三', '未知', '13900000003', NULL, 20, NULL, 98.00, '普通会员', '启用', SYSDATE - 15);
 
 INSERT INTO product (product_id, category_id, supplier_id, product_name, barcode, specification, purchase_price, sale_price, is_promotion, promotion_price, stock_warning, unit, status) VALUES (1, 1, 1, '原味薯片', '690000000001', '80g/袋', 4.20, 6.50, '否', NULL, 20, '袋', '在售');
 INSERT INTO product (product_id, category_id, supplier_id, product_name, barcode, specification, purchase_price, sale_price, is_promotion, promotion_price, stock_warning, unit, status) VALUES (2, 1, 1, '精装大米', '690000000002', '5kg/袋', 38.00, 49.90, '否', NULL, 10, '袋', '在售');

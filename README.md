@@ -67,7 +67,7 @@ docker run -d --name retail-db -p 1521:1521 retail-db
 
 | 表名 | 说明 | 关键字段 |
 |------|------|----------|
-| `member` | 会员信息表 | member_id, phone, points, member_tag, total_amount, level_name (普通/黄金/钻石), discount_rate |
+| `member` | 会员信息表 | member_id, phone, points, member_tag, total_amount, level_name (普通/黄金/钻石，折扣率由后端映射), status |
 | `point_record` | 积分流水表 | point_record_id, change_type (增加/扣减/抵现), member_id → member, sale_id → sale_order |
 | `point_config` | 积分规则配置表 | config_id, earn_rate (获取率), redeem_rate (抵扣率), redeem_max_rate (抵扣上限) |
 

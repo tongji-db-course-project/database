@@ -59,7 +59,7 @@ docker run -d --name retail-db -p 1521:1521 retail-db
 
 | 表名 | 说明 | 关键字段 |
 |------|------|----------|
-| `supplier` | 供应商信息表 | supplier_id, credit_level, payment_cycle, min_order_qty, bank_name, bank_account |
+| `supplier` | 供应商信息表 | supplier_id, credit_level, payment_cycle, min_order_qty, bank_name, bank_account, status |
 | `product_category` | 商品类别表 | category_id, category_name, status |
 | `product` | 商品基础资料表 | product_id, barcode, purchase_price, sale_price, is_promotion, promotion_price, stock_warning, category_id → product_category, supplier_id → supplier |
 

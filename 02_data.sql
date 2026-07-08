@@ -63,9 +63,9 @@ INSERT INTO sys_role_menu (role_menu_id, role_id, menu_id) VALUES (10, 2, 7);
 INSERT INTO sys_role_menu (role_menu_id, role_id, menu_id) VALUES (11, 3, 6);
 INSERT INTO sys_role_menu (role_menu_id, role_id, menu_id) VALUES (12, 3, 8);
 
-INSERT INTO supplier (supplier_id, supplier_name, contact_name, phone, email, address, credit_level, payment_cycle, min_order_qty, bank_name, bank_account) VALUES (1, '华东食品供应商', '陈经理', '021-88880001', 'food@example.com', '上海市浦东新区', 'A', 30, 10, '中国工商银行', '6222021001000001');
-INSERT INTO supplier (supplier_id, supplier_name, contact_name, phone, email, address, credit_level, payment_cycle, min_order_qty, bank_name, bank_account) VALUES (2, '南方日化批发部', '刘经理', '020-88880002', 'daily@example.com', '广州市天河区', 'A', 45, 5, '中国建设银行', '6227002002000002');
-INSERT INTO supplier (supplier_id, supplier_name, contact_name, phone, email, address, credit_level, payment_cycle, min_order_qty, bank_name, bank_account) VALUES (3, '北方饮品有限公司', '赵经理', '010-88880003', 'drink@example.com', '北京市朝阳区', 'B', 30, 20, '中国农业银行', '6228483003000003');
+INSERT INTO supplier (supplier_id, supplier_name, contact_name, phone, email, address, credit_level, payment_cycle, min_order_qty, bank_name, bank_account, status) VALUES (1, '华东食品供应商', '陈经理', '021-88880001', 'food@example.com', '上海市浦东新区', 'A', 30, 10, '中国工商银行', '6222021001000001', '启用');
+INSERT INTO supplier (supplier_id, supplier_name, contact_name, phone, email, address, credit_level, payment_cycle, min_order_qty, bank_name, bank_account, status) VALUES (2, '南方日化批发部', '刘经理', '020-88880002', 'daily@example.com', '广州市天河区', 'A', 45, 5, '中国建设银行', '6227002002000002', '启用');
+INSERT INTO supplier (supplier_id, supplier_name, contact_name, phone, email, address, credit_level, payment_cycle, min_order_qty, bank_name, bank_account, status) VALUES (3, '北方饮品有限公司', '赵经理', '010-88880003', 'drink@example.com', '北京市朝阳区', 'B', 30, 20, '中国农业银行', '6228483003000003', '启用');
 
 INSERT INTO product_category (category_id, category_name, category_desc, status) VALUES (1, '食品', '休闲食品和粮油食品', '启用');
 INSERT INTO product_category (category_id, category_name, category_desc, status) VALUES (2, '日用品', '家庭日常用品', '启用');

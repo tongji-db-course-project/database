@@ -8,7 +8,7 @@ ENV ORACLE_PASSWORD=123456 \
     APP_USER=retail_admin \
     APP_USER_PASSWORD=123456
 
-# 将你的初始化脚本（建表、插入基础数据）放入镜像中的特定目录
+# 将初始化脚本（建表、插入基础数据）放入镜像中的特定目录
 # 容器首次启动时会自动按顺序执行这些 SQL 文件
 COPY *.sql /container-entrypoint-initdb.d/
 

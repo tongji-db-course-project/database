@@ -1,0 +1,21 @@
+01_schema.sql
+  s_2f4f40746c890e::t_8dcf3c0567e53e 70
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "b7f840f952c9cccc2bf8287c0a2f920d85b6b605",
+  "prompts": {},
+  "sessions": {
+    "s_2f4f40746c890e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "13188026-3948-4bad-b93a-171101a84d0a",
+        "model": "unknown"
+      },
+      "human_author": "Mingze Li <limingze.lmz@bytedance.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}

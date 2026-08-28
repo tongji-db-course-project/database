@@ -226,6 +226,10 @@ CREATE TABLE sale_order (
     sale_date       DATE,
     total_amount    NUMBER(12, 2),
     discount_amount NUMBER(12, 2),
+    promotion_discount NUMBER(12, 2) DEFAULT 0,
+    member_discount NUMBER(12, 2) DEFAULT 0,
+    coupon_deduct   NUMBER(12, 2) DEFAULT 0,
+    point_deduct    NUMBER(12, 2) DEFAULT 0,
     paid_amount     NUMBER(12, 2),
     pay_type        VARCHAR2(20),
     status          VARCHAR2(20) DEFAULT '待支付',
@@ -245,6 +249,10 @@ COMMENT ON COLUMN sale_order.user_id IS '收银员编号';
 COMMENT ON COLUMN sale_order.sale_date IS '销售日期';
 COMMENT ON COLUMN sale_order.total_amount IS '原始总金额';
 COMMENT ON COLUMN sale_order.discount_amount IS '优惠金额';
+COMMENT ON COLUMN sale_order.promotion_discount IS '限时特价让利总额';
+COMMENT ON COLUMN sale_order.member_discount IS '会员折扣让利总额';
+COMMENT ON COLUMN sale_order.coupon_deduct IS '优惠券核销总额';
+COMMENT ON COLUMN sale_order.point_deduct IS '积分抵扣金额';
 COMMENT ON COLUMN sale_order.paid_amount IS '实付金额';
 COMMENT ON COLUMN sale_order.pay_type IS '支付方式';
 COMMENT ON COLUMN sale_order.status IS '销售单状态';

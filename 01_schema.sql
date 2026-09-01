@@ -181,7 +181,7 @@ CREATE TABLE purchase_order (
     CONSTRAINT fk_po_supplier FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id),
     CONSTRAINT fk_po_applicant FOREIGN KEY (applicant_id) REFERENCES sys_user(user_id),
     CONSTRAINT fk_po_approver FOREIGN KEY (approver_id) REFERENCES sys_user(user_id),
-    CONSTRAINT ck_po_status CHECK (status IN ('待审批', '已审批', '已入库', '已作废'))
+    CONSTRAINT ck_po_status CHECK (status IN ('待审批', '已驳回', '已审批', '已入库', '已作废'))
 );
 
 COMMENT ON TABLE purchase_order IS '采购订单主表';

@@ -186,8 +186,8 @@ INSERT INTO order_status_log (log_id, order_type, order_id, old_status, new_stat
 INSERT INTO point_config (config_id, earn_rate, redeem_rate, redeem_min, redeem_max_rate, status, update_time) VALUES (1, 0.01, 0.01, 100, 0.5, '启用', SYSDATE);
 
 -- 29. daily_settlement（每日营业结转）
-INSERT INTO daily_settlement (settlement_id, settlement_date, total_sales, cash_amount, wechat_amount, alipay_amount, promotion_discount, member_discount, coupon_deduct, point_deduct, point_consumed, order_count, status, create_time) VALUES (1, TO_DATE('2026-05-03', 'YYYY-MM-DD'), 145.50, 0.00, 75.80, 69.70, 0.00, 0.00, 0.00, 0.00, 0, 2, '已生成', TO_DATE('2026-05-03 23:59:00', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO daily_settlement (settlement_id, settlement_date, total_sales, cash_amount, wechat_amount, alipay_amount, promotion_discount, member_discount, coupon_deduct, point_deduct, point_consumed, order_count, status, create_time) VALUES (2, TO_DATE('2026-05-04', 'YYYY-MM-DD'), 19.50, 19.50, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0, 1, '已生成', TO_DATE('2026-05-04 23:59:00', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO daily_settlement (settlement_id, settlement_date, total_sales, refund_amount, net_sales, cash_amount, wechat_amount, alipay_amount, promotion_discount, member_discount, coupon_deduct, point_deduct, point_consumed, order_count, status, create_time) VALUES (1, TO_DATE('2026-05-03', 'YYYY-MM-DD'), 145.50, 0.00, 145.50, 0.00, 75.80, 69.70, 0.00, 0.00, 0.00, 0.00, 0, 2, '已生成', TO_DATE('2026-05-03 23:59:00', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO daily_settlement (settlement_id, settlement_date, total_sales, refund_amount, net_sales, cash_amount, wechat_amount, alipay_amount, promotion_discount, member_discount, coupon_deduct, point_deduct, point_consumed, order_count, status, create_time) VALUES (2, TO_DATE('2026-05-04', 'YYYY-MM-DD'), 19.50, 0.00, 19.50, 19.50, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0, 1, '已生成', TO_DATE('2026-05-04 23:59:00', 'YYYY-MM-DD HH24:MI:SS'));
 
 -- ============================================================
 -- 同步 Identity 序列：种子数据显式写入了主键，但 Identity 自增序列仍停留在 1。

@@ -451,11 +451,11 @@ CREATE TABLE order_status_log (
     operator_id NUMBER(10),
     change_time DATE DEFAULT SYSDATE,
     remark      VARCHAR2(200),
-    CONSTRAINT ck_osl_type CHECK (order_type IN ('采购单', '销售单', '退货单'))
+    CONSTRAINT ck_osl_type CHECK (order_type IN ('采购单', '采购退货单', '销售单', '退货单'))
 );
 
 COMMENT ON TABLE order_status_log IS '订单状态流转日志表：记录采购/销售/退货单的每一次状态变更';
-COMMENT ON COLUMN order_status_log.order_type IS '订单类型：采购单/销售单/退货单';
+COMMENT ON COLUMN order_status_log.order_type IS '订单类型：采购单/采购退货单/销售单/退货单';
 COMMENT ON COLUMN order_status_log.order_id IS '对应订单主表的主键';
 COMMENT ON COLUMN order_status_log.old_status IS '变更前状态（首次创建时为NULL）';
 COMMENT ON COLUMN order_status_log.new_status IS '变更后状态';

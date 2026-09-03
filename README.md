@@ -137,7 +137,7 @@ cat 02_data.sql | docker exec -i retail-db sqlplus retail_admin/123456@FREEPDB1
 
 | 表名 | 说明 | 关键字段 |
 |------|------|----------|
-| `daily_settlement` | 每日营业结转表 | settlement_date (UNIQUE), total_sales, 按支付方式/优惠类型拆分统计, 独立展示限时特价让利/会员折扣/优惠券核销/积分抵扣 |
+| `daily_settlement` | 每日营业结转表 | settlement_date (UNIQUE), total_sales, refund_amount, net_sales, 按支付方式/优惠类型拆分统计, 独立展示限时特价让利/会员折扣/优惠券核销/积分抵扣 |
 | `order_status_log` | 订单状态流转日志 | log_id, order_type (采购单/销售单/退货单), order_id, old_status→new_status, change_time |
 
 ## 种子数据概览

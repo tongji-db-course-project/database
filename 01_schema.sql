@@ -310,7 +310,8 @@ CREATE TABLE inventory (
     last_update_time DATE NOT NULL,
     CONSTRAINT fk_inventory_product FOREIGN KEY (product_id) REFERENCES product(product_id),
     CONSTRAINT fk_inventory_warehouse FOREIGN KEY (warehouse_id) REFERENCES warehouse(warehouse_id),
-    CONSTRAINT uk_inv_prod_wh UNIQUE (product_id, warehouse_id)
+    CONSTRAINT uk_inv_prod_wh UNIQUE (product_id, warehouse_id),
+    CONSTRAINT ck_inventory_nonnegative CHECK (current_stock >= 0)
 );
 
 COMMENT ON COLUMN inventory.inventory_id IS '库存编号';

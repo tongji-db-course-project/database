@@ -362,7 +362,7 @@ CREATE TABLE return_order (
     create_time   DATE DEFAULT SYSDATE,
     update_time   DATE,
     remark        VARCHAR2(200),
-    CONSTRAINT ck_return_status CHECK (status IN ('待处理', '已完成', '已拒绝')),
+    CONSTRAINT ck_return_status CHECK (status IN ('待处理', '已审核', '已完成', '已拒绝')),
     CONSTRAINT uk_return_order_no UNIQUE (return_no),
     CONSTRAINT fk_return_sale FOREIGN KEY (sale_id) REFERENCES sale_order(sale_id),
     CONSTRAINT fk_return_member FOREIGN KEY (member_id) REFERENCES member(member_id),
@@ -376,7 +376,7 @@ COMMENT ON COLUMN return_order.member_id IS '会员编号';
 COMMENT ON COLUMN return_order.operator_id IS '经办人编号';
 COMMENT ON COLUMN return_order.return_date IS '退货日期';
 COMMENT ON COLUMN return_order.refund_amount IS '退款金额';
-COMMENT ON COLUMN return_order.status IS '退货状态';
+COMMENT ON COLUMN return_order.status IS '退货状态：待处理/已审核/已完成/已拒绝';
 COMMENT ON COLUMN return_order.create_time IS '订单创建时间';
 COMMENT ON COLUMN return_order.update_time IS '最后状态变更时间';
 COMMENT ON COLUMN return_order.remark IS '备注';

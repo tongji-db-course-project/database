@@ -111,7 +111,7 @@ cat 02_data.sql | docker exec -i retail-db sqlplus retail_admin/123456@FREEPDB1
 |------|------|----------|
 | `sale_order` | 销售订单表 | sale_id, sale_no, total_amount, discount_amount, paid_amount, pay_type, member_id → member, user_id → sys_user, create_time, update_time |
 | `sale_order_detail` | 销售单明细 | sale_detail_id, sale_id → sale_order, product_id → product |
-| `return_order` | 销售退货单主表 | return_id, return_no, refund_amount, sale_id → sale_order, member_id → member, create_time, update_time |
+| `return_order` | 销售退货单主表 | return_id, return_no, refund_amount, status (待处理/已审核/已完成/已拒绝), sale_id → sale_order, member_id → member, create_time, update_time |
 | `return_order_detail` | 销售退货单明细 | return_detail_id, return_id → return_order (CASCADE), product_id → product |
 
 ### 优惠促销
@@ -144,7 +144,7 @@ cat 02_data.sql | docker exec -i retail-db sqlplus retail_admin/123456@FREEPDB1
 
 `02_data.sql` 包含完整的测试数据集，覆盖所有业务场景：
 
-- **3 个角色 / 3 个用户**：系统管理员(admin)、采购员(buyer01)、收银员(cashier01)，密码均为 `123456`。仓管职能并入采购员
+- **3 个角色 / 3 个用户**：系统管理员(admin)、采购员(buyer01)、收银员(cashier01)，密码均为 `123456`
 - **3 家供应商**：华东食品(A级)、南方日化(A级)、北方饮品(B级)
 - **3 个商品类别 / 5 个商品**：薯片、大米、洗衣液、矿泉水、橙汁
 - **3 个会员**：黄金会员(95折)、钻石会员(9折)、普通会员(原价)各一个
@@ -157,6 +157,18 @@ cat 02_data.sql | docker exec -i retail-db sqlplus retail_admin/123456@FREEPDB1
 - **优惠券/调拨/盘点**：表结构已建，种子数据暂未填充
 
 所有数据日期以 2026-05 为基准，互相关联形成完整的业务闭环。
+
+### 业务职责分离
+
+| 业务流程 | 发起/制单 | 审核 | 库存执行 |
+|---|---|---|---|
+| 采购 | 采购员 | 系统管理员 | 采购员入库 |
+| 采购退货 | 采购员 | 系统管理员 | 采购员出库 |
+| 销售退货 | 收银员 | 系统管理员 | 采购员验收入库 |
+
+新建数据库时按顺序执行 `01_schema.sql` 和 `02_data.sql`：前者已经包含销售退货“已审核”状态，后者会在导入种子数据后把各业务表 Identity 推进到现有最大主键之后，避免新增业务数据时主键冲突。
+
+已经初始化的数据库不会因 `git pull` 自动更新表结构，需要根据 `01_schema.sql`、`02_data.sql` 的差异手动执行对应的 `ALTER TABLE` 升级语句。
 
 ## 命名规范
 

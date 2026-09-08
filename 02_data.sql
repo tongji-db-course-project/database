@@ -176,9 +176,10 @@ INSERT INTO order_status_log (log_id, order_type, order_id, old_status, new_stat
 INSERT INTO order_status_log (log_id, order_type, order_id, old_status, new_status, operator_id, change_time, remark) VALUES (10, '销售单', 3, NULL, '待支付', 3, TO_DATE('2026-05-04 09:20:00', 'YYYY-MM-DD HH24:MI:SS'), 'POS创建销售单');
 INSERT INTO order_status_log (log_id, order_type, order_id, old_status, new_status, operator_id, change_time, remark) VALUES (11, '销售单', 3, '待支付', '已完成', 3, TO_DATE('2026-05-04 09:20:00', 'YYYY-MM-DD HH24:MI:SS'), '收银完成');
 
--- 退货单 RO20260505001：待处理 → 已完成
+-- 退货单 RO20260505001：待处理 → 已审核 → 已完成
 INSERT INTO order_status_log (log_id, order_type, order_id, old_status, new_status, operator_id, change_time, remark) VALUES (12, '退货单', 1, NULL, '待处理', 3, TO_DATE('2026-05-05 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), '客户申请退货');
-INSERT INTO order_status_log (log_id, order_type, order_id, old_status, new_status, operator_id, change_time, remark) VALUES (13, '退货单', 1, '待处理', '已完成', 3, TO_DATE('2026-05-05 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), '退货完成，已退款');
+INSERT INTO order_status_log (log_id, order_type, order_id, old_status, new_status, operator_id, change_time, remark) VALUES (13, '退货单', 1, '待处理', '已审核', 1, TO_DATE('2026-05-05 11:05:00', 'YYYY-MM-DD HH24:MI:SS'), '管理员审核通过');
+INSERT INTO order_status_log (log_id, order_type, order_id, old_status, new_status, operator_id, change_time, remark) VALUES (14, '退货单', 1, '已审核', '已完成', 2, TO_DATE('2026-05-05 11:10:00', 'YYYY-MM-DD HH24:MI:SS'), '采购员验收入库，退货完成并退款');
 
 -- 24. point_config（积分规则配置）
 INSERT INTO point_config (config_id, earn_rate, redeem_rate, redeem_min, redeem_max_rate, status, update_time) VALUES (1, 0.01, 0.01, 100, 0.5, '启用', SYSDATE);

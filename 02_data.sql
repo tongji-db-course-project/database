@@ -97,7 +97,7 @@ INSERT INTO product_category (category_id, category_name, category_desc, status)
 
 INSERT INTO member (member_id, member_name, gender, phone, birthday, points, member_tag, total_amount, level_name, status, create_time) VALUES (1, '赵一一', '女', '13900000001', TO_DATE('1992-05-18', 'YYYY-MM-DD'), 126, '高消费', 1568.50, '黄金会员', '启用', SYSDATE - 90);
 INSERT INTO member (member_id, member_name, gender, phone, birthday, points, member_tag, total_amount, level_name, status, create_time) VALUES (2, '钱二二', '男', '13900000002', TO_DATE('1988-09-20', 'YYYY-MM-DD'), 366, 'VIP', 5832.00, '钻石会员', '启用', SYSDATE - 180);
-INSERT INTO member (member_id, member_name, gender, phone, birthday, points, member_tag, total_amount, level_name, status, create_time) VALUES (3, '孙三三', '未知', '13900000003', NULL, 20, NULL, 98.00, '普通会员', '启用', SYSDATE - 15);
+INSERT INTO member (member_id, member_name, gender, phone, birthday, points, member_tag, total_amount, level_name, status, create_time) VALUES (3, '孙三三', '未知', '13900000003', NULL, 21, NULL, 247.70, '普通会员', '启用', SYSDATE - 15);
 
 INSERT INTO product (product_id, category_id, supplier_id, product_name, barcode, specification, purchase_price, sale_price, is_promotion, promotion_price, stock_warning, unit, status) VALUES (1, 1, 1, '原味薯片', '690000000001', '80g/袋', 4.20, 6.50, '否', NULL, 20, '袋', '在售');
 INSERT INTO product (product_id, category_id, supplier_id, product_name, barcode, specification, purchase_price, sale_price, is_promotion, promotion_price, stock_warning, unit, status) VALUES (2, 1, 1, '精装大米', '690000000002', '5kg/袋', 38.00, 49.90, '否', NULL, 10, '袋', '在售');
@@ -116,6 +116,7 @@ INSERT INTO purchase_order_detail (purchase_detail_id, purchase_id, product_id, 
 INSERT INTO sale_order (sale_id, sale_no, member_id, user_id, sale_date, total_amount, discount_amount, promotion_discount, member_discount, coupon_deduct, point_deduct, paid_amount, pay_type, status, create_time, update_time) VALUES (1, 'SO20260503001', 1, 3, TO_DATE('2026-05-03 10:15:00', 'YYYY-MM-DD HH24:MI:SS'), 80.90, 4.05, 0.00, 4.05, 0.00, 0.00, 76.85, '微信', '已完成', TO_DATE('2026-05-03 10:15:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2026-05-03 10:15:00', 'YYYY-MM-DD HH24:MI:SS'));
 INSERT INTO sale_order (sale_id, sale_no, member_id, user_id, sale_date, total_amount, discount_amount, promotion_discount, member_discount, coupon_deduct, point_deduct, paid_amount, pay_type, status, create_time, update_time) VALUES (2, 'SO20260503002', 2, 3, TO_DATE('2026-05-03 15:30:00', 'YYYY-MM-DD HH24:MI:SS'), 68.70, 6.87, 0.00, 6.87, 0.00, 0.00, 61.83, '支付宝', '已完成', TO_DATE('2026-05-03 15:30:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2026-05-03 15:30:00', 'YYYY-MM-DD HH24:MI:SS'));
 INSERT INTO sale_order (sale_id, sale_no, member_id, user_id, sale_date, total_amount, discount_amount, paid_amount, pay_type, status, create_time, update_time) VALUES (3, 'SO20260504001', NULL, 3, TO_DATE('2026-05-04 09:20:00', 'YYYY-MM-DD HH24:MI:SS'), 19.50, 0.00, 19.50, '现金', '已完成', TO_DATE('2026-05-04 09:20:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2026-05-04 09:20:00', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO sale_order (sale_id, sale_no, member_id, user_id, sale_date, total_amount, discount_amount, promotion_discount, member_discount, coupon_deduct, point_deduct, paid_amount, pay_type, status, create_time, update_time) VALUES (4, 'SO20260506001', 3, 3, TO_DATE('2026-05-06 14:30:00', 'YYYY-MM-DD HH24:MI:SS'), 149.70, 0.00, 0.00, 0.00, 0.00, 0.00, 149.70, '现金', '已完成', TO_DATE('2026-05-06 14:30:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2026-05-06 14:30:00', 'YYYY-MM-DD HH24:MI:SS'));
 
 INSERT INTO sale_order_detail (sale_detail_id, sale_id, product_id, sale_quantity, sale_price) VALUES (1, 1, 1, 2, 6.50);
 INSERT INTO sale_order_detail (sale_detail_id, sale_id, product_id, sale_quantity, sale_price) VALUES (2, 1, 2, 1, 49.90);
@@ -123,12 +124,13 @@ INSERT INTO sale_order_detail (sale_detail_id, sale_id, product_id, sale_quantit
 INSERT INTO sale_order_detail (sale_detail_id, sale_id, product_id, sale_quantity, sale_price) VALUES (4, 2, 3, 2, 29.90);
 INSERT INTO sale_order_detail (sale_detail_id, sale_id, product_id, sale_quantity, sale_price) VALUES (5, 2, 5, 1, 8.90);
 INSERT INTO sale_order_detail (sale_detail_id, sale_id, product_id, sale_quantity, sale_price) VALUES (6, 3, 1, 3, 6.50);
+INSERT INTO sale_order_detail (sale_detail_id, sale_id, product_id, sale_quantity, sale_price) VALUES (7, 4, 2, 3, 49.90);
 
 -- warehouse 必须在 inventory 之前插入，inventory 有 FK 引用 warehouse
 INSERT INTO warehouse (warehouse_id, warehouse_name, address, status, create_time) VALUES (1, '总仓', '默认仓库', '启用', SYSDATE - 180);
 
 INSERT INTO inventory (inventory_id, product_id, warehouse_id, current_stock, last_update_time) VALUES (1, 1, 1, 195, SYSDATE);
-INSERT INTO inventory (inventory_id, product_id, warehouse_id, current_stock, last_update_time) VALUES (2, 2, 1, 79, SYSDATE);
+INSERT INTO inventory (inventory_id, product_id, warehouse_id, current_stock, last_update_time) VALUES (2, 2, 1, 76, SYSDATE);
 INSERT INTO inventory (inventory_id, product_id, warehouse_id, current_stock, last_update_time) VALUES (3, 3, 1, 48, SYSDATE);
 INSERT INTO inventory (inventory_id, product_id, warehouse_id, current_stock, last_update_time) VALUES (4, 4, 1, 591, SYSDATE);
 INSERT INTO inventory (inventory_id, product_id, warehouse_id, current_stock, last_update_time) VALUES (5, 5, 1, 119, SYSDATE);
@@ -138,14 +140,15 @@ INSERT INTO inventory_record (record_id, product_id, record_type, source_no, cha
 INSERT INTO inventory_record (record_id, product_id, record_type, source_no, change_qty, remain_qty, operator_id, record_time, remark) VALUES (3, 1, '销售', 'SO20260503001', -2, 198, 3, TO_DATE('2026-05-03 10:15:00', 'YYYY-MM-DD HH24:MI:SS'), '销售出库');
 INSERT INTO inventory_record (record_id, product_id, record_type, source_no, change_qty, remain_qty, operator_id, record_time, remark) VALUES (4, 3, '销售', 'SO20260503002', -2, 48, 3, TO_DATE('2026-05-03 15:30:00', 'YYYY-MM-DD HH24:MI:SS'), '销售出库');
 INSERT INTO inventory_record (record_id, product_id, record_type, source_no, change_qty, remain_qty, operator_id, record_time, remark) VALUES (5, 1, '销售', 'SO20260504001', -3, 195, 3, TO_DATE('2026-05-04 09:20:00', 'YYYY-MM-DD HH24:MI:SS'), '销售出库');
+INSERT INTO inventory_record (record_id, product_id, record_type, source_no, change_qty, remain_qty, operator_id, record_time, remark) VALUES (6, 2, '销售', 'SO20260506001', -3, 76, 3, TO_DATE('2026-05-06 14:30:00', 'YYYY-MM-DD HH24:MI:SS'), '销售出库');
 
 INSERT INTO return_order (return_id, return_no, sale_id, member_id, operator_id, return_date, refund_amount, status, create_time, update_time, remark) VALUES (1, 'RO20260505001', 1, 1, 3, TO_DATE('2026-05-05 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), 6.50, '已完成', TO_DATE('2026-05-05 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2026-05-05 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), '顾客退回一袋薯片');
 
 INSERT INTO return_order_detail (return_detail_id, return_id, product_id, quantity, refund_price, subtotal) VALUES (1, 1, 1, 1, 6.50, 6.50);
 
-INSERT INTO point_record (point_record_id, member_id, sale_id, change_type, change_points, remain_points, record_time, remark) VALUES (1, 1, 1, '增加', 7, 127, TO_DATE('2026-05-03 10:15:00', 'YYYY-MM-DD HH24:MI:SS'), '销售获得积分');
-INSERT INTO point_record (point_record_id, member_id, sale_id, change_type, change_points, remain_points, record_time, remark) VALUES (2, 2, 2, '增加', 6, 366, TO_DATE('2026-05-03 15:30:00', 'YYYY-MM-DD HH24:MI:SS'), '销售获得积分');
-INSERT INTO point_record (point_record_id, member_id, sale_id, change_type, change_points, remain_points, record_time, remark) VALUES (3, 1, 1, '扣减', -1, 126, TO_DATE('2026-05-05 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), '退货扣减积分');
+-- 演示订单 SO20260506001 实付 149.70 元，按 FLOOR(149.70 * 0.01) 获得 1 积分。
+-- 会员3的积分由期初20分增加至21分。
+INSERT INTO point_record (point_record_id, member_id, sale_id, change_type, change_points, remain_points, record_time, remark) VALUES (1, 3, 4, '增加', 1, 21, TO_DATE('2026-05-06 14:30:00', 'YYYY-MM-DD HH24:MI:SS'), '销售获得积分');
 
 INSERT INTO supplier_settlement (settlement_id, supplier_id, purchase_id, settlement_date, settlement_amount, paid_amount, unpaid_amount, status, remark) VALUES (1, 1, 1, TO_DATE('2026-05-06', 'YYYY-MM-DD'), 4220.00, 4220.00, 0.00, '已结算', '采购单PO20260501001已结清');
 INSERT INTO supplier_settlement (settlement_id, supplier_id, purchase_id, settlement_date, settlement_amount, paid_amount, unpaid_amount, status, remark) VALUES (2, 3, 2, TO_DATE('2026-05-06', 'YYYY-MM-DD'), 1260.00, 500.00, 760.00, '部分结算', '采购单PO20260502001部分付款');
@@ -181,12 +184,17 @@ INSERT INTO order_status_log (log_id, order_type, order_id, old_status, new_stat
 INSERT INTO order_status_log (log_id, order_type, order_id, old_status, new_status, operator_id, change_time, remark) VALUES (13, '退货单', 1, '待处理', '已审核', 1, TO_DATE('2026-05-05 11:05:00', 'YYYY-MM-DD HH24:MI:SS'), '管理员审核通过');
 INSERT INTO order_status_log (log_id, order_type, order_id, old_status, new_status, operator_id, change_time, remark) VALUES (14, '退货单', 1, '已审核', '已完成', 2, TO_DATE('2026-05-05 11:10:00', 'YYYY-MM-DD HH24:MI:SS'), '采购员验收入库，退货完成并退款');
 
+-- 销售单 SO20260506001：待支付 → 已完成（积分获取演示订单）
+INSERT INTO order_status_log (log_id, order_type, order_id, old_status, new_status, operator_id, change_time, remark) VALUES (15, '销售单', 4, NULL, '待支付', 3, TO_DATE('2026-05-06 14:30:00', 'YYYY-MM-DD HH24:MI:SS'), 'POS创建销售单');
+INSERT INTO order_status_log (log_id, order_type, order_id, old_status, new_status, operator_id, change_time, remark) VALUES (16, '销售单', 4, '待支付', '已完成', 3, TO_DATE('2026-05-06 14:30:00', 'YYYY-MM-DD HH24:MI:SS'), '收银完成，获得1积分');
+
 -- 24. point_config（积分规则配置）
 INSERT INTO point_config (config_id, earn_rate, redeem_rate, redeem_min, redeem_max_rate, status, update_time) VALUES (1, 0.01, 0.01, 100, 0.5, '启用', SYSDATE);
 
 -- 29. daily_settlement（每日营业结转）
 INSERT INTO daily_settlement (settlement_id, settlement_date, total_sales, refund_amount, net_sales, cash_amount, wechat_amount, alipay_amount, promotion_discount, member_discount, coupon_deduct, point_deduct, point_consumed, order_count, status, create_time) VALUES (1, TO_DATE('2026-05-03', 'YYYY-MM-DD'), 138.68, 0.00, 138.68, 0.00, 76.85, 61.83, 0.00, 10.92, 0.00, 0.00, 0, 2, '已生成', TO_DATE('2026-05-03 23:59:00', 'YYYY-MM-DD HH24:MI:SS'));
 INSERT INTO daily_settlement (settlement_id, settlement_date, total_sales, refund_amount, net_sales, cash_amount, wechat_amount, alipay_amount, promotion_discount, member_discount, coupon_deduct, point_deduct, point_consumed, order_count, status, create_time) VALUES (2, TO_DATE('2026-05-04', 'YYYY-MM-DD'), 19.50, 0.00, 19.50, 19.50, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0, 1, '已生成', TO_DATE('2026-05-04 23:59:00', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO daily_settlement (settlement_id, settlement_date, total_sales, refund_amount, net_sales, cash_amount, wechat_amount, alipay_amount, promotion_discount, member_discount, coupon_deduct, point_deduct, point_consumed, order_count, status, create_time) VALUES (3, TO_DATE('2026-05-06', 'YYYY-MM-DD'), 149.70, 0.00, 149.70, 149.70, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0, 1, '已生成', TO_DATE('2026-05-06 23:59:00', 'YYYY-MM-DD HH24:MI:SS'));
 
 -- ============================================================
 -- 同步 Identity 序列：种子数据显式写入了主键，但 Identity 自增序列仍停留在 1。
